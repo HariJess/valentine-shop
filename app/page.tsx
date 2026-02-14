@@ -1,0 +1,46 @@
+"use client";
+
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
+import Contact from "@/components/Contact";
+import CarouselSection from "@/components/CarouselSection";
+import ScrollIndicator from "@/components/ScrollIndicator";
+
+export default function Home() {
+  const totalSections = 5;
+
+  return (
+    <div className="relative bg-gray-500">
+      {/* <Header /> */}
+      <div style={{ height: `${totalSections * 100}vh` }} />
+      {/* Create scroll space */}
+      
+      {/* Fixed sections that animate in/out */}
+      <CarouselSection sectionIndex={0}>
+        <Hero />
+      </CarouselSection>
+      
+      <CarouselSection sectionIndex={1}>
+        <About />
+      </CarouselSection>
+      
+      <CarouselSection sectionIndex={2}>
+        <Projects />
+      </CarouselSection>
+      
+      <CarouselSection sectionIndex={3}>
+        <Skills />
+      </CarouselSection>
+      
+      <CarouselSection sectionIndex={4}>
+        <Contact />
+      </CarouselSection>
+      
+      {/* <ScrollIndicator /> */}
+      <div style={{ height: `${totalSections * 100}vh` }} />
+    </div>
+  );
+}
