@@ -4,12 +4,20 @@ import React from 'react';
 import { useScrollCarousel } from './ScrollCarousel';
 
 const Hero: React.FC = () => {
-  const { currentSection, scrollToSection, totalSections } = useScrollCarousel();
+  const { currentSection, scrollProgress, scrollToSection, totalSections } = useScrollCarousel();
   const isActive = currentSection === 0;
 
   const scrollToNext = () => {
     scrollToSection(currentSection + 1);
   };
+
+  // Calcul du zoom basé sur le scroll progress
+  // La première section représente de 0 à 1/5 du scroll total
+  const sectionScrollProgress = scrollProgress * (totalSections - 1);
+  const heroProgress = Math.max(0, Math.min(sectionScrollProgress, 1));
+  
+  // Zoom progressif: de 1 (normal) à 2 (2x zoom)
+  const zoomScale = 1 + (heroProgress * 1.2);
 
   return (
     <section 
@@ -20,6 +28,9 @@ const Hero: React.FC = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+        transform: `scale(${zoomScale})`,
+        transformOrigin: 'center center',
+        transition: 'transform 0.05s linear',
       }}
     >
       {/* Button Container */}
