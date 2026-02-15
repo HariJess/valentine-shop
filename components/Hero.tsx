@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
       }}
     >
       {/* Button Container */}
-      <div className={`relative z-10 bottom-16 pb-12 sm:pb-16 transition-all duration-1000 ${
+      <div className={`relative z-10 bottom-8 pb-12 sm:pb-16 transition-all duration-1000 ${
         isActive ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10'
       }`}>
         <button 
