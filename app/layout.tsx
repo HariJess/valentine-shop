@@ -3,11 +3,11 @@ import "./globals.css";
 import ScrollCarouselProvider from "@/components/ScrollCarousel";
 
 export const metadata: Metadata = {
-  title: "Josh - Portfolio",
-  description: "Full-stack developer portfolio showcasing my work and skills",
+  title: "Valentine's Day Shop",
+  description: "Discover unique gifts and romantic presents for Valentine's Day",
   openGraph: {
-    title: "Josh - Portfolio",
-    description: "Full-stack developer portfolio showcasing my work and skills",
+    title: "Valentine's Day Shop",
+    description: "Discover unique gifts and romantic presents for Valentine's Day",
     type: "website",
   },
 };

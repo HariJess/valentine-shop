@@ -6,7 +6,7 @@ import { useScrollCarousel } from './ScrollCarousel';
 const ScrollIndicator: React.FC = () => {
   const { currentSection, totalSections } = useScrollCarousel();
 
-  const sectionNames = ['Home', 'About', 'Projects', 'Skills', 'Contact'];
+  const sectionNames = ['Home', 'Store','About', 'Projects', 'Skills', 'Contact'];
 
   const scrollToSection = (sectionIndex: number) => {
     const targetScrollY = (sectionIndex / (totalSections - 1)) * (document.documentElement.scrollHeight - window.innerHeight);

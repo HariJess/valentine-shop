@@ -8,25 +8,25 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import CarouselSection from "@/components/ui/CarouselSection";
-import ScrollIndicator from "@/components/ScrollIndicator";
+// import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function Home() {
   const totalSections = 5;
 
   return (
     <div className="relative bg-gray-500">
-      {/* <Header /> */}
+      <Header />
       <div style={{ height: `${totalSections * 100}vh` }} />
       {/* Create scroll space */}
-      
-      {/* Store - Background (visible dès le début derrière Hero) */}
-      <CarouselSection sectionIndex={1} isBackground={true}>
-        <Store />
-      </CarouselSection>
       
       {/* Hero - Foreground (avec zoom animation) */}
       <CarouselSection sectionIndex={0}>
         <Hero />
+      </CarouselSection>
+      
+      {/* Store - Background (visible dès le début derrière Hero) */}
+      <CarouselSection sectionIndex={1} isBackground={true}>
+        <Store />
       </CarouselSection>
 
       <CarouselSection sectionIndex={2}>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import { Menu, X, Clock } from 'lucide-react';
 import { useScrollCarousel } from './ScrollCarousel';
 
 const Header: React.FC = () => {
@@ -20,52 +20,55 @@ const Header: React.FC = () => {
     setIsMenuOpen(false);
   };
 
-  const sectionNames = ['Store', 'About', 'Projects', 'Skills', 'Contact'];
-
-  // Cacher le header quand on est à la section Hero (index 0)
-  if (currentSection === 0) {
-    return null;
-  }
+  const sectionNames = ['Home', 'Store', 'About', 'Projects', 'Skills', 'Contact'];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 mx-12 my-12">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-gray-200/50">
+      {/* Scroll Indicator Bar */}
+      {/* <div className="w-full h-1 bg-gray-100/50">
+        <div 
+          className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-300"
+          style={{
+            width: `${(currentSection / Math.max(totalSections - 1, 1)) * 100}%`,
+          }}
+        />
+      </div> */}
+
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo/Brand - Cliquable pour aller à Hero */}
-          <button 
-            onClick={() => scrollToSection(0)}
-            className="flex items-center space-x-4 hover:opacity-80 transition-opacity"
-          >
-            <div className="text-xl sm:text-2xl md:text-4xl font-bold text-white hover:text-white/80">Hari</div>
-          </button>
+          {/* Logo/Brand */}
+          <div className="flex items-center space-x-4">
+            <div className="text-xl sm:text-2xl font-bold text-gray-900">Josh</div>
+            {/* <div className="hidden sm:block text-sm text-gray-600">
+              {currentTime.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
+            </div> */}
+          </div>
 
           {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {sectionNames.map((item, index) => (
               <button
-              key={index}
-              onClick={() => scrollToSection(index + 1)} //+1 car on a enlevé Home
-              className={`transition-colors duration-300 capitalize font-medium pb-2 ${
-                currentSection === index + 1
-                ? 'text-white/90 border-b-2 border-white/90' 
-                : 'text-white hover:text-white/80 hover:border-white/80 border-b-2 border-transparent'
-              }`}
+                key={index}
+                onClick={() => scrollToSection(index)}
+                className={`transition-colors duration-300 capitalize font-medium ${
+                  currentSection === index 
+                    ? 'text-blue-600' 
+                    : 'text-gray-700 hover:text-blue-600'
+                }`}
               >
-              {item}
+                {item}
               </button>
             ))}
-            </div>
+          </div>
 
-          {/* User Section */}
-            <div className="flex items-center space-x-4">
-            <div className="relative">
-              <ShoppingCart className='text-white/90 w-6 h-6'/>
-              <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full px-1">3</span> {/* Badge for cart items */}
+          {/* Time Display */}
+          {/* <div className="flex items-center space-x-2 sm:space-x-4 text-sm text-gray-600">
+            <div className="flex items-center space-x-1">
+              <Clock size={16} />
+              <span>{currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
             </div>
-            <div className="relative">
-              <User className='text-white/90 w-6 h-6'/> {/* User icon for My Account */}
-            </div>
-            </div>
+            <div className="hidden md:block">22°</div>
+          </div> */}
 
           {/* Mobile Menu Button */}
           <button
@@ -82,9 +85,9 @@ const Header: React.FC = () => {
             {sectionNames.map((item, index) => (
               <button
                 key={index}
-                onClick={() => scrollToSection(index + 1)} //+1 car on a enlevé Home
+                onClick={() => scrollToSection(index)}
                 className={`block w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors duration-300 capitalize font-medium ${
-                  currentSection === index + 1
+                  currentSection === index 
                     ? 'text-blue-600' 
                     : 'text-gray-700 hover:text-blue-600'
                 }`}
