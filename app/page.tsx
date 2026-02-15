@@ -7,7 +7,7 @@ import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
-import CarouselSection from "@/components/CarouselSection";
+import CarouselSection from "@/components/ui/CarouselSection";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function Home() {

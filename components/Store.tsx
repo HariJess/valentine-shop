@@ -7,19 +7,23 @@ const Store: React.FC = () => {
     const { scrollProgress, totalSections } = useScrollCarousel();
 
     // Calcul du zoom basé sur le scroll progress
-    // Store commence son zoom après que Hero soit complètement zoomé (sectionIndex 1)
+    // Store zoom EN MÊME TEMPS que Hero (pendant la première section)
     const sectionScrollProgress = scrollProgress * (totalSections - 1);
-    const storeProgress = Math.max(0, Math.min(sectionScrollProgress - 1, 1));
+    const storeProgress = Math.max(0, Math.min(sectionScrollProgress, 1));
     
-    // Zoom progressif: de 1 (normal) à 2.2x zoom
+    // Zoom progressif: de 1 (normal) à 2.2x zoom, puis revient à 1
     const zoomScale = 1 + (storeProgress * 1.2);
+    
+    // Transition progressive de backgroundSize: 100% -> 80% progressivement
+    // On utilise un calcul continu au lieu d'un changement brusque
+    const backgroundSizePercent = 100 - (storeProgress * 20); // 100% -> 80%
 
     return (
         <section 
-            className="min-h-screen relative overflow-hidden flex flex-col items-center justify-end bg-cover bg-center"
+            className="min-h-screen relative overflow-hidden flex flex-col items-center justify-end bg-center"
             style={{
                 backgroundImage: "url('/bg_store.png')",
-                backgroundSize: 'cover',
+                backgroundSize: `${backgroundSizePercent}%`,
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 transform: `scale(${zoomScale})`,
