@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
     <section 
       className="min-h-screen relative overflow-hidden flex flex-col items-center justify-end bg-cover bg-center"
       style={{
-        backgroundImage: "url('/bg_1.png')",
+        backgroundImage: "url('/bg_hero.png')",
         backgroundAttachment: 'fixed',
         backgroundSize: 'cover',
         backgroundPosition: 'center',

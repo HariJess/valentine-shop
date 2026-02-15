@@ -33,7 +33,7 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
         // Appliquer la marge et border radius
         margin: '16px',
         borderRadius: '24px',
-        border: '4px solid rgb(229, 231, 235)',
+        border: '1px solid rgb(229, 231, 235)',
         boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
         width: 'calc(100% - 32px)',
         height: 'calc(100% - 32px)',

@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Store from "@/components/Store";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
@@ -24,18 +25,22 @@ export default function Home() {
       </CarouselSection>
       
       <CarouselSection sectionIndex={1}>
+        <Store />
+      </CarouselSection>
+
+      <CarouselSection sectionIndex={2}>
         <About />
       </CarouselSection>
       
-      <CarouselSection sectionIndex={2}>
+      <CarouselSection sectionIndex={3}>
         <Projects />
       </CarouselSection>
       
-      <CarouselSection sectionIndex={3}>
+      <CarouselSection sectionIndex={4}>
         <Skills />
       </CarouselSection>
       
-      <CarouselSection sectionIndex={4}>
+      <CarouselSection sectionIndex={5}>
         <Contact />
       </CarouselSection>
       
