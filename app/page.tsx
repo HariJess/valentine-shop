@@ -19,13 +19,14 @@ export default function Home() {
       <div style={{ height: `${totalSections * 100}vh` }} />
       {/* Create scroll space */}
       
-      {/* Fixed sections that animate in/out */}
-      <CarouselSection sectionIndex={0}>
-        <Hero />
+      {/* Store - Background (visible dès le début derrière Hero) */}
+      <CarouselSection sectionIndex={1} isBackground={true}>
+        <Store />
       </CarouselSection>
       
-      <CarouselSection sectionIndex={1}>
-        <Store />
+      {/* Hero - Foreground (avec zoom animation) */}
+      <CarouselSection sectionIndex={0}>
+        <Hero />
       </CarouselSection>
 
       <CarouselSection sectionIndex={2}>
