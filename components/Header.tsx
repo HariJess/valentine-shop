@@ -58,12 +58,12 @@ const Header: React.FC = () => {
 
           {/* User Section */}
             <div className="flex items-center space-x-4">
-            <div className="relative">
-              <ShoppingCart className='text-white/90 w-6 h-6'/>
+            <div className="relative cursor-pointer">
+              <ShoppingCart className='text-white/90 w-6 h-6 hover:text-white/50 transition-colors'/>
               <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full px-1">3</span> {/* Badge for cart items */}
             </div>
-            <div className="relative">
-              <User className='text-white/90 w-6 h-6'/> {/* User icon for My Account */}
+            <div className="relative cursor-pointer">
+              <User className='text-white/90 w-6 h-6 hover:text-white/50 transition-colors'/> {/* User icon for My Account */}
             </div>
             </div>
 
