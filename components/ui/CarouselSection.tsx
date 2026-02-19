@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useScrollCarousel } from '../ScrollCarousel';
+import { useScrollCarousel } from './ScrollCarousel';
 
 interface CarouselSectionProps {
   children: React.ReactNode;

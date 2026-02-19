@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ScrollCarouselProvider from "@/components/ScrollCarousel";
+import ScrollCarouselProvider from "@/components/ui/ScrollCarousel";
 import { LoadingProvider } from "@/components/LoadingProvider";
 
 export const metadata: Metadata = {

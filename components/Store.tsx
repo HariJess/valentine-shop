@@ -1,8 +1,10 @@
 "use client";
 
 import React from 'react';
-import { useScrollCarousel } from './ScrollCarousel';
-import ProductCarousel from './ProductCarousel';
+import { Download, ChevronRight } from 'lucide-react';
+import { useScrollCarousel } from './ui/ScrollCarousel';
+import ProductCarousel from '@/components/ui/ProductCarousel';
+import BottomNavBar from '@/components/ui/ProductBottomNavBar';
 
 const Store: React.FC = () => {
     const { scrollProgress, totalSections } = useScrollCarousel();
@@ -28,6 +30,14 @@ const Store: React.FC = () => {
         { id: 5, name: 'Velvet Cocoa', image: '/store-product/pr-5.png', price: 27.99 },
     ];
 
+    const handleCatalogDownload = () => {
+        // Crée un lien de téléchargement du catalogue
+        const link = document.createElement('a');
+        link.href = '/catalogue.pdf'; // À adapter avec le chemin du catalogue
+        link.download = 'Catalogue_Produits.pdf';
+        link.click();
+    };
+
     return (
         <section 
             className="min-h-screen relative overflow-hidden flex flex-col items-center justify-center bg-center"
@@ -44,9 +54,13 @@ const Store: React.FC = () => {
             {/* Overlay pour meilleure lisibilité */}
             <div className="absolute inset-0 bg-black/20" />
             
+            {/* Bouton Catalogue au milieu */}
+            <div className="absolute bottom-[250px] z-50 w-full flex items-center justify-center">
+                <BottomNavBar fixed={false} className={'text-xs'}/>
+            </div>
             {/* Carousel Container */}
             <div className="relative z-10 w-full flex flex-col items-center justify-center h-screen">
-                <ProductCarousel products={products} autoScrollInterval={5000} />
+                <ProductCarousel products={products} showDetailsButton={true} />
             </div>
         </section>
     );

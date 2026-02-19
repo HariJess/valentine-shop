@@ -15,7 +15,7 @@ function HeartModel({ path }: ModelProps) {
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 bg-white flex items-center justify-center">
+    <div className="fixed z-50 inset-0 bg-white flex items-center justify-center">
       <div className="relative w-full h-full">
         {/* 3D Heart Model with React Three Fiber */}
         <div className="absolute inset-0 w-full h-full">

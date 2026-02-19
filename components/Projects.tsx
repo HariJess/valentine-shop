@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
-import { useScrollCarousel } from './ScrollCarousel';
+import { useScrollCarousel } from './ui/ScrollCarousel';
 
 const Projects: React.FC = () => {
   const { currentSection, scrollProgress } = useScrollCarousel();

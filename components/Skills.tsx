@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useScrollCarousel } from './ScrollCarousel';
+import { useScrollCarousel } from './ui/ScrollCarousel';
 
 const Skills: React.FC = () => {
   const { currentSection, scrollProgress } = useScrollCarousel();

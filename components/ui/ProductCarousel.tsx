@@ -13,11 +13,13 @@ interface Product {
 interface ProductCarouselProps {
   products: Product[];
   autoScrollInterval?: number; // en millisecondes (default: 5000)
+  showDetailsButton?: boolean; // Affiche le bouton Détails (default: false)
 }
 
 export const ProductCarousel: React.FC<ProductCarouselProps> = ({ 
   products, 
-  autoScrollInterval = 5000 
+  autoScrollInterval = 5000,
+  showDetailsButton = false
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -77,20 +79,21 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  {/* <div className="p-3 md:p-4">
-                    <h3 className="text-sm md:text-base font-bold text-gray-900 mb-1 line-clamp-1">
-                      {product.name}
-                    </h3>
-
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-base md:text-lg font-bold text-blue-600">
-                        ${product.price}
-                      </span>
-                      <button className="px-2 md:px-3 py-1 text-xs md:text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 whitespace-nowrap">
-                        Add Cart
-                      </button>
+                  
+                  {/* Bouton Détails personnalisé - Affiche uniquement si showDetailsButton est true */}
+                  {/* {showDetailsButton && (
+                    <div className="flex justify-center mt-4">
+                      <BoutonSaveurs
+                        label="Détails"
+                        bgColor="#d6a93b"
+                        bgColorLight="#f3d08ab7"
+                        bgColorDark="#e6b95a"
+                        textColor="#ffffffc0"
+                        stripeColor="#ffffffc0"
+                        fontSize=".9rem"
+                      />
                     </div>
-                  </div> */}
+                  )} */}
                 </div>
               </div>
             ))}

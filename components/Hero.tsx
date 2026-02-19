@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useScrollCarousel } from './ScrollCarousel';
+import { useScrollCarousel } from './ui/ScrollCarousel';
 
 const Hero: React.FC = () => {
   const { currentSection, scrollProgress, scrollToSection, totalSections } = useScrollCarousel();
@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
       }`}>
         <button 
           onClick={() => { if (isActive) scrollToNext(); }}
-          className="px-6 sm:px-8 py-2 sm:py-3 border-2 border-[#800000] text-[#800000] font-bold text-lg sm:text-xl rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+          className="px-6 sm:px-8 py-2 sm:py-3 border-2 border-red-950 text-red-950 font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
         >
           START EXPERIENCE
         </button>

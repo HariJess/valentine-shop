@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Code2, Palette, Rocket, Users } from 'lucide-react';
-import { useScrollCarousel } from './ScrollCarousel';
+import { useScrollCarousel } from './ui/ScrollCarousel';
 
 const About: React.FC = () => {
   const { currentSection, scrollProgress } = useScrollCarousel();

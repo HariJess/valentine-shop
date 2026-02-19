@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Clock } from 'lucide-react';
-import { useScrollCarousel } from './ScrollCarousel';
+import { useScrollCarousel } from './ui/ScrollCarousel';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
