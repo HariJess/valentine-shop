@@ -33,6 +33,12 @@ const Hero: React.FC = () => {
         transition: 'transform 0.05s linear',
       }}
     >
+      {/* Overlay pour meilleure lisibilité */}
+      <div className="absolute inset-0 bg-black/20" />
+      {/* Shop Name */}
+      <h1 className="absolute top-5 z-10 text-3xl sm:text-4xl font-bold text-red-950 text-center mb-4">
+        Hari
+      </h1>
       {/* Button Container */}
       <div className={`relative z-10 bottom-8 pb-12 sm:pb-16 transition-all duration-1000 ${
         isActive ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10'

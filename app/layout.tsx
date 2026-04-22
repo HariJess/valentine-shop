@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ScrollCarouselProvider from "@/components/ui/ScrollCarousel";
 import { LoadingProvider } from "@/components/LoadingProvider";
+import ScrollCarouselProvider from "@/components/ui/ScrollCarousel";
 
 export const metadata: Metadata = {
   title: "Valentine's Day Shop",

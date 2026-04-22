@@ -4,7 +4,7 @@ import React from 'react';
 import { Download, ChevronRight } from 'lucide-react';
 import { useScrollCarousel } from './ui/ScrollCarousel';
 import ProductCarousel from '@/components/ui/ProductCarousel';
-import BottomNavBar from '@/components/ui/ProductBottomNavBar';
+import ProductBottomNavBar from '@/components/ui/ProductBottomNavBar';
 
 const Store: React.FC = () => {
     const { scrollProgress, totalSections } = useScrollCarousel();
@@ -55,9 +55,9 @@ const Store: React.FC = () => {
             <div className="absolute inset-0 bg-black/20" />
             
             {/* Bouton Catalogue au milieu */}
-            <div className="absolute bottom-[250px] z-50 w-full flex items-center justify-center">
-                <BottomNavBar fixed={false} className={'text-xs'}/>
-            </div>
+            {/* <div className="absolute bottom-[315px] z-50 w-full flex items-center justify-center">
+                <ProductBottomNavBar fixed={false} className={'text-xs'}/>
+            </div> */}
             {/* Carousel Container */}
             <div className="relative z-10 w-full flex flex-col items-center justify-center h-screen">
                 <ProductCarousel products={products} showDetailsButton={true} />

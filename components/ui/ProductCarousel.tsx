@@ -72,7 +72,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                 }`}
               >
                 <div className="rounded-xl overflow-hidden">
-                  <div className="relative overflow-hidden h-40 md:h-56 w-48 md:w-48">
+                  <div className="relative overflow-hidden hover:cursor-pointer h-40 md:h-56 w-48 md:w-48">
                     <img
                       src={product.image}
                       alt={product.name}
