@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
       {/* Overlay pour meilleure lisibilité */}
       <div className="absolute inset-0 bg-black/20" />
       {/* Shop Name */}
-      <h1 className="absolute top-5 z-10 text-3xl sm:text-4xl font-bold text-red-950 text-center mb-4">
+      <h1 className="absolute top-7 md:top-12 lg:top-6 z-10 text-4xl sm:text-5xl font-bold text-red-950 text-center mb-4">
         Hari
       </h1>
       {/* Button Container */}
