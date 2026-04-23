@@ -12,7 +12,7 @@ const Store: React.FC = () => {
   const storeProgress = Math.max(0, Math.min(sectionScrollProgress, 1));
 
   // Desktop inchangé
-  const zoomScale = 1 + storeProgress * 1.2;
+  const zoomScale = 1 + (storeProgress * 1.2);
   const backgroundSizePercent = 100 - storeProgress * 20;
 
   // Ajustements seulement pour tablette / mobile
@@ -46,7 +46,13 @@ const Store: React.FC = () => {
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
       {/* Carousel Container */}
-      <div className="relative z-10 w-full flex flex-col items-center justify-center h-screen">
+      <div className="relative z-10 w-full flex flex-col items-center justify-center h-screen"
+          style={{
+                transform: `scale(${zoomScale})`,
+                transformOrigin: "center center",
+                transition: "transform 0.05s linear",
+            }}
+      >
         <ProductCarousel products={products} showDetailsButton={true} />
       </div>
 
