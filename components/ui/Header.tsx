@@ -116,7 +116,7 @@ const Header: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 ml-2"
+              className="lg:hidden p-2 ml-2 text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -132,8 +132,8 @@ const Header: React.FC = () => {
                   onClick={() => scrollToSection(index + 1)}
                   className={`block w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors duration-300 capitalize font-medium ${
                     currentSection === index + 1
-                      ? 'text-blue-600'
-                      : 'text-gray-700 hover:text-blue-600'
+                      ? 'text-[#720B15]'
+                      : 'text-[#720B15]/70 hover:text-[#720B15]'
                   }`}
                 >
                   {item}
