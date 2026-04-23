@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ShoppingCart, Heart, Info } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -12,32 +12,43 @@ interface Product {
 
 interface ProductCarouselProps {
   products: Product[];
-  autoScrollInterval?: number; // en millisecondes (default: 5000)
-  showDetailsButton?: boolean; // Affiche le bouton Détails (default: false)
+  autoScrollInterval?: number;
+  showDetailsButton?: boolean;
+  hoverImage?: string;
 }
 
-export const ProductCarousel: React.FC<ProductCarouselProps> = ({ 
-  products, 
+export const ProductCarousel: React.FC<ProductCarouselProps> = ({
+  products,
   autoScrollInterval = 5000,
-  showDetailsButton = false
+  hoverImage = '/store-product/hover.png',
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
 
-  // Auto-scroll
+  // Auto-scroll — pause quand panel ouvert
   useEffect(() => {
+    if (isExpanded) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % products.length);
     }, autoScrollInterval);
-
     return () => clearInterval(interval);
-  }, [products.length, autoScrollInterval]);
+  }, [products.length, autoScrollInterval, isExpanded]);
 
   const goToPrevious = () => {
+    setIsExpanded(false);
     setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
   };
 
   const goToNext = () => {
+    setIsExpanded(false);
     setCurrentIndex((prev) => (prev + 1) % products.length);
+  };
+
+  const handleAddToCart = () => {
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 1800);
   };
 
   const visibleProducts = [
@@ -46,11 +57,58 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
     products[(currentIndex + 1) % products.length],
   ];
 
+  const activeProduct = products[currentIndex];
+
+  // Positions absolues des 3 boutons autour du cercle
+  const actionButtons = [
+    {
+      key: 'cart',
+      icon: (
+        <ShoppingCart
+          size={14}
+          className={addedToCart ? 'text-yellow-300' : 'text-white'}
+        />
+      ),
+      onClick: handleAddToCart,
+      title: 'Ajouter au panier',
+      position: { top: '15%', left: '69%' },
+      delay: '80ms',
+      activeClass: 'bg-yellow-500/30 border-yellow-400/60',
+      isActive: addedToCart,
+    },
+    {
+      key: 'fav',
+      icon: (
+        <Heart
+          size={14}
+          fill={isFavorite ? 'rgb(232,90,120)' : 'none'}
+          className={isFavorite ? 'text-pink-400' : 'text-white'}
+        />
+      ),
+      onClick: () => setIsFavorite((v) => !v),
+      title: 'Favoris',
+      position: { top: '43%', left: '83%' },
+      delay: '150ms',
+      activeClass: 'bg-pink-500/30 border-pink-400/60',
+      isActive: isFavorite,
+    },
+    {
+      key: 'info',
+      icon: <Info size={14} className="text-white" />,
+      onClick: () => alert(`Détails : ${activeProduct.name}`),
+      title: 'Détails',
+      position: { top: '71%', left: '70%' },
+      delay: '220ms',
+      activeClass: '',
+      isActive: false,
+    },
+  ];
+
   return (
     <div className="w-full max-w-2xl mx-auto px-4">
       <div className="relative">
-        {/* Main Carousel */}
         <div className="flex items-center justify-between gap-4 md:gap-6 mx-0 lg:mx-24">
+
           {/* Left Arrow */}
           <button
             onClick={goToPrevious}
@@ -60,8 +118,8 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
             <ChevronLeft size={15} className="text-white drop-shadow-lg" />
           </button>
 
-          {/* Products Container - Affiche seulement le produit du centre */}
-          <div className="flex-1 flex justify-center overflow-hidden">
+          {/* Product zone */}
+          <div className="flex-1 flex justify-center items-center">
             {visibleProducts.map((product, index) => (
               <div
                 key={product.id}
@@ -71,29 +129,90 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                     : 'scale-0 opacity-0 z-0 hidden'
                 }`}
               >
-                <div className="rounded-xl overflow-hidden">
-                  <div className="relative overflow-hidden hover:cursor-pointer h-40 md:h-56 w-48 md:w-48">
+                {/* Conteneur carré — taille fixe qui correspond au bracelet */}
+                <div className="relative w-48 h-48 md:w-64 md:h-64">
+
+                  {/* ── Image produit centrée, clippée en cercle ── */}
+                  <div
+                    className={["absolute inset-0 flex items-center justify-center",
+                      isExpanded? "pr-12" : "mr-0 transition-all duration-200 ease-in-out",
+                       "cursor-pointer z-10"].join(' ')}
+                    onClick={() => setIsExpanded((v) => !v)}
+                  >
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-contain"
+                      className={[
+                        'w-2/3 h-2/3 object-contain',
+                        'transition-all duration-300',
+                        isExpanded
+                          ? 'scale-90 brightness-75'
+                          : 'scale-100 brightness-100 hover:scale-95 hover:brightness-90',
+                      ].join(' ')}
                     />
                   </div>
-                  
-                  {/* Bouton Détails personnalisé - Affiche uniquement si showDetailsButton est true */}
-                  {/* {showDetailsButton && (
-                    <div className="flex justify-center mt-4">
-                      <BoutonSaveurs
-                        label="Détails"
-                        bgColor="#d6a93b"
-                        bgColorLight="#f3d08ab7"
-                        bgColorDark="#e6b95a"
-                        textColor="#ffffffc0"
-                        stripeColor="#ffffffc0"
-                        fontSize=".9rem"
-                      />
-                    </div>
-                  )} */}
+
+                  {/* ── Bracelet frame — apparaît au clic avec rotation + fade ── */}
+                  <div
+                    className={[
+                      'absolute inset-0 z-20 pointer-events-none',
+                      'transition-all duration-500 ease-out',
+                      isExpanded
+                        ? 'opacity-100 scale-100 rotate-0'
+                        : 'opacity-0 scale-75 -rotate-12',
+                    ].join(' ')}
+                  >
+                    <img
+                      src={hoverImage}
+                      alt=""
+                      aria-hidden
+                      className="w-full h-full object-cover"
+                      style={{ mixBlendMode: 'screen' }}
+                    />
+                  </div>
+
+                  {/* ── Boutons action positionnés autour ── */}
+                  {actionButtons.map((btn) => (
+                    <button
+                      key={btn.key}
+                      onClick={btn.onClick}
+                      title={btn.title}
+                      className={[
+                        'absolute z-30 w-9 h-9 rounded-full',
+                        'flex items-center justify-center',
+                        'border backdrop-blur-sm',
+                        'transition-all duration-300',
+                        isExpanded
+                          ? 'opacity-100 scale-100'
+                          : 'opacity-0 scale-50 pointer-events-none',
+                        btn.isActive
+                          ? btn.activeClass
+                          : 'bg-white/10 border-white/20 hover:bg-white/25 hover:border-white/40 hover:scale-110',
+                      ].join(' ')}
+                      style={{
+                        top: btn.position.top,
+                        left: btn.position.left,
+                        transitionDelay: isExpanded ? btn.delay : '0ms',
+                      }}
+                    >
+                      {btn.icon}
+                    </button>
+                  ))}
+
+                  {/* ── Toast "Ajouté" ── */}
+                  <p
+                    className={[
+                      'absolute -bottom-6 left-1/2 -translate-x-1/2 z-30',
+                      'text-xs tracking-widest whitespace-nowrap font-light text-yellow-300/90',
+                      'transition-all duration-300',
+                      addedToCart
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-1 pointer-events-none',
+                    ].join(' ')}
+                  >
+                    Ajouté ✓
+                  </p>
+
                 </div>
               </div>
             ))}
@@ -107,28 +226,8 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
           >
             <ChevronRight size={15} className="text-white drop-shadow-lg" />
           </button>
-        </div>
 
-        {/* Indicators - Barre améliorée */}
-        {/* <div className="flex justify-center items-center gap-2 mt-4 md:mt-6">
-          <span className="text-white text-xs md:text-sm font-medium drop-shadow-lg">
-            {currentIndex + 1} / {products.length}
-          </span>
-          <div className="flex gap-1">
-            {products.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`transition-all duration-300 rounded-full ${
-                  index === currentIndex
-                    ? 'bg-white w-6 md:w-8 h-2 md:h-2.5'
-                    : 'bg-white/40 w-2 md:w-2.5 h-2 md:h-2.5 hover:bg-white/60'
-                }`}
-                aria-label={`Go to product ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

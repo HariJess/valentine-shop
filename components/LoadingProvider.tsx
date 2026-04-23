@@ -27,7 +27,7 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
       {isLoading && mounted === false && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
           <Loading />
         </div>
       )}
