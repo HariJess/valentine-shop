@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useScrollCarousel } from "./ui/ScrollCarousel";
 import ProductCarousel from "@/components/ui/ProductCarousel";
 import ProductBottomNavBar from "@/components/ui/ProductBottomNavBar";
@@ -13,6 +13,30 @@ const Store: React.FC = () => {
 
   // Desktop inchangé
   const zoomScale = 1 + (storeProgress * 1.2);
+  const [deviceScale, setDeviceScale] = useState(zoomScale);
+
+  //Zoom plus modéré pour tablette et mobile
+  const zoomScaleTablet = 1 + (storeProgress * 0.9);
+  const zoomScaleMobile = 1 + (storeProgress * 0.5);
+  // Ajustement dynamique du zoom en fonction de la taille de l'écran
+  useEffect(() => {
+  const updateScale = () => {
+    const width = window.innerWidth;
+
+    if (width <= 640) {
+      setDeviceScale(zoomScaleMobile);
+    } else if (width <= 1024) {
+      setDeviceScale(zoomScaleTablet);
+    } else {
+      setDeviceScale(zoomScale);
+    }
+  };
+
+  updateScale();
+  window.addEventListener("resize", updateScale);
+  return () => window.removeEventListener("resize", updateScale);
+}, [zoomScale, zoomScaleTablet, zoomScaleMobile]);
+     
   const backgroundSizePercent = 100 - storeProgress * 20;
 
   // Ajustements seulement pour tablette / mobile
@@ -48,7 +72,7 @@ const Store: React.FC = () => {
       {/* Carousel Container */}
       <div className="relative z-10 w-full flex flex-col items-center justify-center h-screen"
           style={{
-                transform: `scale(${zoomScale})`,
+                transform: `scale(${deviceScale})`,
                 transformOrigin: "center center",
                 transition: "transform 0.05s linear",
             }}
